@@ -49,6 +49,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BUg-sp-Bbs">
+                                <rect key="frame" x="0.0" y="262" width="320" height="44"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="103" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="5yn-wh-llP">
                                 <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -111,12 +115,16 @@
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="5yn-wh-llP" secondAttribute="trailing" id="JSw-Vi-tOF"/>
                             <constraint firstItem="5yn-wh-llP" firstAttribute="top" secondItem="vsh-Am-cWS" secondAttribute="bottom" id="PYv-gw-XHf"/>
                             <constraint firstAttribute="bottom" secondItem="5yn-wh-llP" secondAttribute="bottom" id="sUe-JS-TBG"/>
                             <constraint firstItem="5yn-wh-llP" firstAttribute="leading" secondItem="Lrl-lb-ayQ" secondAttribute="leading" id="w1x-hH-WwR"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="32K-H7-haf" appends="YES" id="3bO-ZS-j0J"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" id="BOA-6a-7wA"/>
                     <connections>
@@ -124,6 +132,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="orf-U8-6w1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="32K-H7-haf">
+                    <connections>
+                        <action selector="tablePanGesture:" destination="s8r-dn-KG9" id="NGF-qZ-UPD"/>
+                    </connections>
+                </panGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="688" y="320"/>
         </scene>

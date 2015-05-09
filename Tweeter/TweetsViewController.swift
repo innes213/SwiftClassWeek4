@@ -10,6 +10,31 @@ import UIKit
 
 class TweetsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
+    var tableOnCenter: CGPoint!
+    var tableRightCenter: CGPoint!
+    
+    @IBAction func tablePanGesture(sender: UIPanGestureRecognizer) {
+        var point = sender.locationInView(tableView)
+        var velocity = sender.velocityInView(tableView)
+        
+        if sender.state == UIGestureRecognizerState.Began {
+            println("Gesture began at: \(point)")
+            //trayOriginalCenter = trayView.center
+        } else if sender.state == UIGestureRecognizerState.Changed {
+            //var translation = sender.translationInView(tableView)
+            //trayOriginalCenter.y + translation.y)
+            println("Gesture changed at: \(point)")
+        } else if sender.state == UIGestureRecognizerState.Ended {
+            println("Gesture ended at: \(point)")
+            if (velocity.x > 0) {
+                tableView.center = tableRightCenter
+            } else {
+                tableView.center = tableOnCenter
+            }
+        }
+    
+    }
+    
     var refreshControl: UIRefreshControl!
     @IBOutlet weak var tableView: UITableView!
     @IBAction func logoutButton(sender: AnyObject) {
@@ -20,13 +45,17 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        println("ViewDidLoad!")
+        println("TableViewController:viewDidLoad")
         tableView.dataSource = self
         tableView.delegate = self
         
         //Autolayout nonsense
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 120
+        
+        tableOnCenter = tableView.center
+        tableRightCenter = tableOnCenter
+        tableRightCenter.x = tableOnCenter.x + 200
         
         refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: "onRefresh", forControlEvents: UIControlEvents.ValueChanged)
