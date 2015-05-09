@@ -20,7 +20,7 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        println("ViewDidLoad!")
         tableView.dataSource = self
         tableView.delegate = self
         
@@ -35,8 +35,7 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         TwitterClient.sharedInstance.homeTimeWithParams(nil,
             completion: { (tweets, error) -> () in self.tweets = tweets
             self.tableView.reloadData()
-        })
-        
+        })        
     }
     
     func delay(delay:Double, closure:()->()) {
@@ -51,6 +50,7 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     func onRefresh() {
         TwitterClient.sharedInstance.homeTimeWithParams(nil,
             completion: { (tweets, error) -> () in self.tweets = tweets
+                println("reloading table")
                 self.tableView.reloadData()
                 self.refreshControl.endRefreshing()
         })
@@ -63,7 +63,7 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         // Dispose of any resources that can be recreated.
     }
     
-
+/*
     
     // MARK: - Navigation
 
@@ -84,7 +84,7 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         }
     }
     
-    
+*/
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tweets != nil {
             return tweets!.count
@@ -95,8 +95,9 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        var cell = tableView.dequeueReusableCellWithIdentifier("TweetCell", forIndexPath: indexPath) as! TweetCell
+        var cell = tableView.dequeueReusableCellWithIdentifier("tweetCell", forIndexPath: indexPath) as! TweetCell
         cell.tweet = tweets[indexPath.row]
+        println("dequeing cell")
         
         return cell
     }

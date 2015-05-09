@@ -15,8 +15,10 @@ class LoginViewController: UIViewController {
         TwitterClient.sharedInstance.loginWithCompletion() {
             (user: User?, error: NSError?) in
             if user != nil {
+                println("\(user)")
                 self.performSegueWithIdentifier("loginSegue", sender: self)
             } else {
+                println("Authentication Error")
                 var alert = UIAlertView()
                 alert.message = "Authentication Error"
                 alert.show()

@@ -8,8 +8,8 @@
 
 import UIKit
 
-let twitterConsumerKey = "LiF50ev3oRBDgueeEvQpfcN0G"
-let twitterConsumerSecret = "98MfonwSSzQKWgP4wE4SPj58xjaY9XqwutgTIawB0Nrt3uPkJM"
+let twitterConsumerKey = "wlvsgOZfqi298jToDqxQmC8tv"
+let twitterConsumerSecret = "Q2vF70K16t6Kj1dYNwzHVhleO2Y1enEmZuBhw05RullrRpdA9Q"
 let twitterBaseURL = NSURL(string: "https://api.twitter.com")
 
 class TwitterClient: BDBOAuth1RequestOperationManager {
@@ -44,9 +44,6 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
     func postUpdate(updateText: String, completion: (error: NSError?) -> ()) {
         
         var params = NSDictionary(object: updateText, forKey: "status")
-        //{"status":"\(updateText)"} as NSDictionary?
-        //params. = "{status:\(updateText)}" as NSDictionary
-        //params.setValue(updateText, forKey: "status")
         
         POST("1.1/statuses/update.json",
             parameters: params,
@@ -59,7 +56,6 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
                 println(error.description)
                 completion(error: error)
         })
-            
     }
     
     func loginWithCompletion(completion: (user: User?, error: NSError?) -> ()) {
@@ -69,7 +65,7 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
         TwitterClient.sharedInstance.fetchRequestTokenWithPath(
             "oauth/request_token",
             method: "GET",
-            callbackURL: NSURL(string: "tweeter://oauth"),
+            callbackURL: NSURL(string: "tweeterbyrob://oauth"),
             scope: nil,
             success: { (requestToken: BDBOAuth1Credential!) -> Void in
                 println("Request token fetch success")
@@ -96,7 +92,6 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
                 TwitterClient.sharedInstance.GET("1.1/account/verify_credentials.json",
                     parameters: nil,
                     success: { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
-                        //println("user: \(response)")
                         var user = User(dictionary: response as! NSDictionary)
                         User.currentUser = user
                         println("user: \(user.name)")
@@ -105,14 +100,10 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
                         println("Error retrieving current user")
                         self.loginCompletion?(user: nil, error: error)
                 })
-                
-                
             })
             {(error: NSError!) -> Void in
                 println("Failed to get access token.")
                 self.loginCompletion?(user: nil, error: error)
         }
-
-    }
-   
+    }   
 }
