@@ -19,6 +19,9 @@
 		B79965CC1AFB3BE100842130 /* TweeterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B79965CB1AFB3BE100842130 /* TweeterTests.swift */; };
 		B7FF021E1AFDE388005BCBEF /* TweetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7FF021D1AFDE388005BCBEF /* TweetCell.swift */; };
 		B7FF02201AFE99BE005BCBEF /* TweetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7FF021F1AFE99BE005BCBEF /* TweetViewController.swift */; };
+		B7FF02221AFEBB6A005BCBEF /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7FF02211AFEBB6A005BCBEF /* MenuView.swift */; };
+		B7FF02261AFECE9F005BCBEF /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7FF02251AFECE9F005BCBEF /* ProfileViewController.swift */; };
+		B7FF022A1B000590005BCBEF /* TweeterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7FF02291B000590005BCBEF /* TweeterViewController.swift */; };
 		C3AEA00135C062961BF8BA1E /* libPods-Tweeter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7178A81A548A1C7931326EBC /* libPods-Tweeter.a */; };
 /* End PBXBuildFile section */
 
@@ -52,6 +55,9 @@
 		B79965CB1AFB3BE100842130 /* TweeterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweeterTests.swift; sourceTree = "<group>"; };
 		B7FF021D1AFDE388005BCBEF /* TweetCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetCell.swift; sourceTree = "<group>"; };
 		B7FF021F1AFE99BE005BCBEF /* TweetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetViewController.swift; sourceTree = "<group>"; };
+		B7FF02211AFEBB6A005BCBEF /* MenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
+		B7FF02251AFECE9F005BCBEF /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		B7FF02291B000590005BCBEF /* TweeterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweeterViewController.swift; sourceTree = "<group>"; };
 		DAA8B21AAB317D3E03387EE4 /* Pods-Tweeter.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tweeter.release.xcconfig"; path = "Pods/Target Support Files/Pods-Tweeter/Pods-Tweeter.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -94,6 +100,8 @@
 		B77B36321AFDA56300358024 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				B7FF021D1AFDE388005BCBEF /* TweetCell.swift */,
+				B7FF02211AFEBB6A005BCBEF /* MenuView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -101,10 +109,11 @@
 		B77B36331AFDA57200358024 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				B7FF02291B000590005BCBEF /* TweeterViewController.swift */,
 				B7FF021F1AFE99BE005BCBEF /* TweetViewController.swift */,
-				B7FF021D1AFDE388005BCBEF /* TweetCell.swift */,
 				B77B36411AFDA74D00358024 /* LoginViewController.swift */,
 				B77B36421AFDA74D00358024 /* TweetsViewController.swift */,
+				B7FF02251AFECE9F005BCBEF /* ProfileViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -325,8 +334,11 @@
 			files = (
 				B77B36431AFDA74D00358024 /* LoginViewController.swift in Sources */,
 				B77B363B1AFDA60F00358024 /* User.swift in Sources */,
+				B7FF02261AFECE9F005BCBEF /* ProfileViewController.swift in Sources */,
 				B77B363A1AFDA60F00358024 /* Tweet.swift in Sources */,
 				B7FF021E1AFDE388005BCBEF /* TweetCell.swift in Sources */,
+				B7FF022A1B000590005BCBEF /* TweeterViewController.swift in Sources */,
+				B7FF02221AFEBB6A005BCBEF /* MenuView.swift in Sources */,
 				B7FF02201AFE99BE005BCBEF /* TweetViewController.swift in Sources */,
 				B77B36441AFDA74D00358024 /* TweetsViewController.swift in Sources */,
 				B77B36371AFDA5CE00358024 /* TwitterClient.swift in Sources */,

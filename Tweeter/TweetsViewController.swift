@@ -9,30 +9,11 @@
 import UIKit
 
 class TweetsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-
-    var tableOnCenter: CGPoint!
-    var tableRightCenter: CGPoint!
     
-    @IBAction func tablePanGesture(sender: UIPanGestureRecognizer) {
-        var point = sender.locationInView(tableView)
-        var velocity = sender.velocityInView(tableView)
-        
-        if sender.state == UIGestureRecognizerState.Began {
-            println("Gesture began at: \(point)")
-            //trayOriginalCenter = trayView.center
-        } else if sender.state == UIGestureRecognizerState.Changed {
-            //var translation = sender.translationInView(tableView)
-            //trayOriginalCenter.y + translation.y)
-            println("Gesture changed at: \(point)")
-        } else if sender.state == UIGestureRecognizerState.Ended {
-            println("Gesture ended at: \(point)")
-            if (velocity.x > 0) {
-                tableView.center = tableRightCenter
-            } else {
-                tableView.center = tableOnCenter
-            }
-        }
-    
+    @IBAction func profileImageTap(sender: UITapGestureRecognizer) {
+        println("image tapped")
+        println("\(sender.description)")
+        performSegueWithIdentifier("viewProfileSegue", sender: self)
     }
     
     var refreshControl: UIRefreshControl!
@@ -52,10 +33,6 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         //Autolayout nonsense
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 120
-        
-        tableOnCenter = tableView.center
-        tableRightCenter = tableOnCenter
-        tableRightCenter.x = tableOnCenter.x + 200
         
         refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: "onRefresh", forControlEvents: UIControlEvents.ValueChanged)
@@ -92,7 +69,6 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         // Dispose of any resources that can be recreated.
     }
     
-/*
     
     // MARK: - Navigation
 
@@ -101,19 +77,27 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
         
+        if (segue.identifier == "viewProfileSegue") {
+            println("segue to view profile")
+            if let cell = sender as? UITableViewCell {
+                let indexPath = tableView.indexPathForCell(cell)
+                let user = tweets![indexPath!.row].user
+                let profileViewController = segue.destinationViewController as! ProfileViewController
+                profileViewController.user = user
+                println("\(user)")
+            }
+        } else {
+            if let cell = sender as? UITableViewCell {
+                let indexPath = tableView.indexPathForCell(cell)!
+                let tweet = tweets![indexPath.row]
+                let tweetViewController = segue.destinationViewController as! TweetViewController
         
-        if let cell = sender as? UITableViewCell {
-            let indexPath = tableView.indexPathForCell(cell)!
-        
-            let tweet = tweets![indexPath.row]
-        
-            let tweetViewController = segue.destinationViewController as! TweetViewController
-        
-            tweetViewController.tweet = tweet
+                tweetViewController.tweet = tweet
+            }
         }
     }
     
-*/
+
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tweets != nil {
             return tweets!.count
@@ -126,7 +110,6 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         
         var cell = tableView.dequeueReusableCellWithIdentifier("tweetCell", forIndexPath: indexPath) as! TweetCell
         cell.tweet = tweets[indexPath.row]
-        println("dequeing cell")
         
         return cell
     }

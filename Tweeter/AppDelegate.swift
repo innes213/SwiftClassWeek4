@@ -14,15 +14,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     var storyboard = UIStoryboard(name: "Main", bundle: nil)
     
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    func application(application: UIApplication, AdidFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "userDidLogout", name: userDidLogoutNotification, object: nil)
         
         if User.currentUser != nil {
             println("Current User detected: \(User.currentUser?.name)")
             //var vc = storyboard.instantiateViewControllerWithIdentifier("navController") as! UIViewController
-            var vc = storyboard.instantiateViewControllerWithIdentifier("tweetsViewController") as! UIViewController
+            var vc = storyboard.instantiateViewControllerWithIdentifier("tweeterViewController") as! UIViewController
             window?.rootViewController = vc
+        } else {
+            println("No user cached.")
         }
         return true
     }

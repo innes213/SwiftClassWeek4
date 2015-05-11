@@ -5,7 +5,6 @@
 //  Created by Rob Hislop on 5/3/15.
 //  Copyright (c) 2015 Rob Hislop. All rights reserved.
 //
-
 import UIKit
 
 class TweetCell: UITableViewCell {
@@ -18,7 +17,7 @@ class TweetCell: UITableViewCell {
     var tweet: Tweet! {
         didSet {
             profileImage.setImageWithURL(tweet.user?.profileImageUrl)
-            nameLabel.text = tweet.user?.screenname
+            nameLabel.text = tweet.user?.name
             timeStampLabel.text = tweet.createdAtString
             tweetLabel.text = tweet.text
         }
@@ -29,6 +28,7 @@ class TweetCell: UITableViewCell {
         
         profileImage.layer.cornerRadius = 35
         profileImage.clipsToBounds = true
+        
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
