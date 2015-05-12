@@ -9,11 +9,10 @@
 import UIKit
 
 class TweeterViewController: UIViewController {
-
-
     
     var viewOnCenter: CGPoint!
     var viewRightCenter: CGPoint!
+    var delegate: TweetsViewControllerDelegate?
     
     @IBAction func viewPanGesture(sender: UIPanGestureRecognizer) {
         var point = sender.locationInView(view)
@@ -26,9 +25,9 @@ class TweeterViewController: UIViewController {
         } else if sender.state == UIGestureRecognizerState.Ended {
             println("Gesture ended at: \(point)")
             if (velocity.x > 0) {
-            view.center = viewRightCenter
+                view.center = viewRightCenter
             } else {
-            view.center = viewOnCenter
+                view.center = viewOnCenter
             }
         }
         
@@ -40,10 +39,23 @@ class TweeterViewController: UIViewController {
         performSegueWithIdentifier("viewProfileSegue", sender: self)
     }
 
+    var tweetsViewController: TweetsViewController!
+    var tweetsNavigationController: UINavigationController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         println("TweeterViewController:viewDidLoad")
+        
+        tweetsViewController = UIStoryboard.tweetsViewController()
+        tweetsViewController.delegate = self
+        
+        // wrap the centerViewController in a navigation controller, so we can push views to it
+        // and display bar button items in the navigation bar
+        tweetsNavigationController = UINavigationController(rootViewController: tweetsViewController)
+        view.addSubview(tweetsNavigationController.view)
+        addChildViewController(tweetsNavigationController)
+        
+        tweetsNavigationController.didMoveToParentViewController(self)
         
         viewOnCenter = view.center
         viewRightCenter = viewOnCenter
@@ -85,4 +97,44 @@ class TweeterViewController: UIViewController {
     
  */
 
+}
+
+// MARK: TweeterViewController delegate
+
+extension TweeterViewController: TweetsViewControllerDelegate {
+    
+    func toggleProfileView() {
+    }
+    
+    func toggleMentionsView() {
+    }
+    
+    func addProfileViewController() {
+    }
+    
+    func addMentionsViewController() {
+    }
+    
+    func animateProfileView(#shouldExpand: Bool) {
+    }
+    
+    func animateMentionsView(#shouldExpand: Bool) {
+    }
+}
+
+private extension UIStoryboard {
+    class func mainStoryboard() -> UIStoryboard { return UIStoryboard(name: "Main", bundle: NSBundle.mainBundle()) }
+    
+    class func profileViewController() -> ProfileViewController? {
+        return mainStoryboard().instantiateViewControllerWithIdentifier("profileViewController") as? ProfileViewController
+    }
+    
+    class func mentionsViewController() -> MentionsViewController? {
+        return mainStoryboard().instantiateViewControllerWithIdentifier("mentionsViewController") as? MentionsViewController
+    }
+    
+    class func tweetsViewController() -> TweetsViewController? {
+        return mainStoryboard().instantiateViewControllerWithIdentifier("tweetsViewController") as? TweetsViewController
+    }
+    
 }

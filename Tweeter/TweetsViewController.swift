@@ -8,6 +8,13 @@
 
 import UIKit
 
+@objc
+protocol TweetsViewControllerDelegate {
+    optional func toggleProfileView()
+    optional func toggleMetnionsView()
+    optional func collapseViews()
+}
+
 class TweetsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBAction func profileImageTap(sender: UITapGestureRecognizer) {
@@ -15,6 +22,8 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         println("\(sender.description)")
         performSegueWithIdentifier("viewProfileSegue", sender: self)
     }
+    
+    var delegate: TweetsViewControllerDelegate!
     
     var refreshControl: UIRefreshControl!
     @IBOutlet weak var tableView: UITableView!
